@@ -7,17 +7,20 @@ import { AppAuthService } from '../../app/services/app.auth.service';
 })
 export class LoginPage {
     loading: Loading;
-    registerCredentials = { email: '', password: '' };
+    registerCredentials = { login: '', password: '', 'versionProtocol': '', 'versionUrl': '' };
 
     constructor(private nav: NavController, private auth: AppAuthService, private alertCtrl: AlertController, private loadingCtrl: LoadingController) { }
 
-    public createAccount() {
-        this.nav.push('RegisterPage');
-    }
-
     public login() {
-        this.showLoading()
-
+        this.showLoading();
+        this.auth.Login(this.registerCredentials.login, this.registerCredentials.password).subscribe(
+            success => {
+                console.log(success);
+            },
+            err => {
+                console.log(err);
+            }
+        );
     }
 
     showLoading() {

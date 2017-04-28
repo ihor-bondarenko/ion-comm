@@ -3,9 +3,15 @@
             <ion-row>
                 <ion-col>
                     <ion-list inset>
-
                         <ion-item>
-                            <ion-input type="text" placeholder="Username" name="username" [(ngModel)]="registerCredentials.email" required></ion-input>
+                            <ion-label>Protocol</ion-label>
+                            <ion-select [(ngModel)]="registerCredentials.versionProtocol" name="versionProtocol" [interface]="action-sheet">
+                                <ion-option value="http">http</ion-option>
+                                <ion-option value="http">https</ion-option>
+                            </ion-select>
+                        </ion-item>
+                        <ion-item>
+                            <ion-input type="text" placeholder="Username" name="username" [(ngModel)]="registerCredentials.login" required></ion-input>
                         </ion-item>
 
                         <ion-item>

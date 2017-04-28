@@ -6,10 +6,12 @@ import 'rxjs/add/operator/catch';
 import { AppCredentialService } from "./app.credential.service";
 import md5 from 'md5';
 import * as _ from "lodash";
+import { Subject } from 'rxjs/Subject';
 //import { AppSnakeBarService } from "./app.snakebar.service";
 
 @Injectable()
 export class AppAuthService {
+    private subject = new Subject<any>();
     public token: string;
     private headers: any;
     private options: RequestOptionsArgs;
