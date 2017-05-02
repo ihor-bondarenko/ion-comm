@@ -1,17 +1,17 @@
 import { Injectable }     from '@angular/core';
-import { Http, Response, RequestOptions, RequestOptionsArgs } from '@angular/http';
+import { Http, Response, RequestOptions, RequestOptionsArgs, Headers } from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { AppCredentialService } from "./app.credential.service";
 import md5 from 'md5';
 import * as _ from "lodash";
-import { Subject } from 'rxjs/Subject';
+//import { Subject } from 'rxjs/Subject';
 //import { AppSnakeBarService } from "./app.snakebar.service";
 
 @Injectable()
 export class AppAuthService {
-    private subject = new Subject<any>();
+    //private subject = new Subject<any>();
     public token: string;
     private headers: any;
     private options: RequestOptionsArgs;
@@ -22,11 +22,11 @@ export class AppAuthService {
         this.options = { headers: this.headers };
     }
 
-    Login(username: string, password: string) : Observable<boolean>{
+    Login(username: string, password: string, versionUrl: string) : Observable<boolean>{
         let options = new RequestOptions(this.options);
-        let body = 'token=' + encodeURIComponent(md5(this._credentialService.versionUrl)) + '&username=' + encodeURIComponent(username) + '&password=' + encodeURIComponent(password) + '&imei=thinkpad&';
+        let body = 'token=' + encodeURIComponent(md5(versionUrl)) + '&username=' + encodeURIComponent(username) + '&password=' + encodeURIComponent(password) + '&imei=thinkpad&';
         //console.log(tokenNotExpired());
-        return this.http.post(this._credentialService.versionProtocol + '://' + this._credentialService.versionUrl+'/mobilep/device/login',body,options)
+        return this.http.post(this._credentialService.versionProtocol + '://' + versionUrl + '/mobilep/device/login',body,options)
             // ...and calling .json() on the response to return data
             .map((res:Response) => {
                // let token = res.json() && res.json().token;

@@ -12,8 +12,8 @@ export class LoginPage {
     constructor(private nav: NavController, private auth: AppAuthService, private alertCtrl: AlertController, private loadingCtrl: LoadingController) { }
 
     public login() {
-        this.showLoading();
-        this.auth.Login(this.registerCredentials.login, this.registerCredentials.password).subscribe(
+        //this.showLoading();
+        this.auth.Login(this.registerCredentials.login, this.registerCredentials.password, this.registerCredentials.versionUrl).subscribe(
             success => {
                 console.log(success);
             },
